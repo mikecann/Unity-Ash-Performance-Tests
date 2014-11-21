@@ -1,4 +1,4 @@
 Unity-Ash-Performance-Tests
 ===========================
 
-Some performance tests for the Unity-Ash project
+Tests a number of critical performance points in the [Unity-Ash](https://github.com/mikecann/Unity-Ash) project.

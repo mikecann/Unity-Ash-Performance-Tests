@@ -10,13 +10,13 @@ namespace Assets.Scripts.Systems
 {
     public class MovementSystem : SystemBase
     {
-        private GameConfig config;
-
+        private Bounds bounds;
         private NodeList nodes;
 
-        public MovementSystem(GameConfig config)
+        public MovementSystem()
         {
-            this.config = config;
+            var size = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+            bounds = new Bounds(Vector3.zero, new Vector3(size.x * 2, size.y * 2));
         }
 
         override public void AddToGame(IGame game)
@@ -32,21 +32,21 @@ namespace Assets.Scripts.Systems
                 var transform = node.Transform;
 			    var rigidbody = node.Rigidbody;
 
-                if (transform.position.x < config.Bounds.min.x)
+                if (transform.position.x < bounds.min.x)
 			    {
-                    transform.position = new Vector3(transform.position.x + config.Bounds.size.x, transform.position.y, transform.position.z);
+                    transform.position = new Vector3(transform.position.x + bounds.size.x, transform.position.y, transform.position.z);
 			    }
-                if (transform.position.x > config.Bounds.max.x)
+                if (transform.position.x > bounds.max.x)
                 {
-                    transform.position = new Vector3(transform.position.x - config.Bounds.size.x, transform.position.y, transform.position.z);
+                    transform.position = new Vector3(transform.position.x - bounds.size.x, transform.position.y, transform.position.z);
                 }
-                if (transform.position.y < config.Bounds.min.y)
+                if (transform.position.y < bounds.min.y)
                 {
-                    transform.position = new Vector3(transform.position.x, transform.position.y + config.Bounds.size.y, transform.position.z);
+                    transform.position = new Vector3(transform.position.x, transform.position.y + bounds.size.y, transform.position.z);
                 }
-                if (transform.position.y > config.Bounds.max.y)
+                if (transform.position.y > bounds.max.y)
                 {
-                    transform.position = new Vector3(transform.position.x, transform.position.y - config.Bounds.size.y, transform.position.z);
+                    transform.position = new Vector3(transform.position.x, transform.position.y - bounds.size.y, transform.position.z);
                 }
             }
         }
